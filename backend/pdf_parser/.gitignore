@@ -1,0 +1,11 @@
+# Virtual environment
+venv/
+
+# PDF output
+uncleanedpdf.txt
+cleanedpdf.txt
+
+# Ignore all downloaded Statista PDF files
+*.pdf
+
+
