@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CheckMark from "../images/image.png";
 
 export default function SourcesPage() {
   const sources = [
@@ -35,13 +36,13 @@ export default function SourcesPage() {
         </div>
         <div className="mx-auto">
           <button
-            className="p-3 rounded-xl text-white"
+            className="hover:scale-90 transition p-3 rounded-xl text-white"
             style={{ backgroundColor: "#0E172A" }}
           >
             Back
           </button>
           <button
-            className="p-3 ml-5 rounded-xl"
+            className="hover:scale-90 transition p-3 ml-5 rounded-xl"
             style={{ backgroundColor: "#00F8F3" }}
           >
             Generate
@@ -56,22 +57,32 @@ function SourceIcon({ source }) {
   const [toggle, setToggle] = useState(false);
   return (
     <div
-      className="w-32 mx-auto mb-5 aspect-square rounded-lg hover:cursor-pointer flex flex-col"
+      className="w-36 hover:scale-110 transition aspect-square mx-auto mb-5 rounded-lg hover:cursor-pointer flex flex-col group relative"
       style={{ backgroundColor: "#BBE3EC" }}
     >
       <div className="p-3 h-fit flex flex-row-reverse">
         <button
           className={
-            "w-4 aspect-square rounded-full outline " +
-            (!toggle ? "bg-transparent" : "bg-green-400")
+            "w-6 aspect-square rounded-full outline overflow-hidden hover:outline-green-600 " +
+            (!toggle ? "bg-transparent" : "bg-green-400 outline-green-600")
           }
           title="Select source for generation."
           onClick={() => {
             setToggle(!toggle);
           }}
-        ></button>
+        >
+          <img
+            className={
+              "w-5/6 m-auto " + (!toggle ? "opacity-0" : "opacity-100")
+            }
+            src={CheckMark}
+          />
+        </button>
       </div>
       <h1 className="self-center mt-5">{source.name}</h1>
+      <h1 className="self-center mt-5 text-teal-800 opacity-0 group-hover:opacity-100 transition">
+        Click to Inspect
+      </h1>
     </div>
   );
 }
