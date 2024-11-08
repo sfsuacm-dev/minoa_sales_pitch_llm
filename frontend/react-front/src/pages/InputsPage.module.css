@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(145deg, #dcfce7, #d1fae5);
+    min-height: 100vh;
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0f172a;
+  }
+  
+  .logo svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .navLinks {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .navLinks a {
+    color: #1e293b;
+    text-decoration: none;
+  }
+  
+  .button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .buttonOutline {
+    border: 1px solid #0f172a;
+  }
+  
+  .buttonFilled {
+    background-color: #0f172a;
+    color: white !important;
+  }
+  
+  .buttonOutline:hover {
+    background-color: #0f172a;
+    color: white;
+  }
+  
+  .buttonFilled:hover {
+    background-color: #1e293b;
+  }
+  
+  .mainContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .heroTitle {
+    font-size: 3.5rem;
+    color: #0f172a;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.25rem;
+    color: #475569;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  
+  .inputSection {
+    max-width: 500px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  }
+  
+  .inputGroup {
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  
+  .inputGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+    font-weight: 500;
+  }
+  
+  .inputGroup input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.35rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .generateButton {
+    background-color: #0f172a;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .generateButton:hover {
+    background-color: #1e293b;
+  }
