@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CheckMark from "../images/image.png";
 
 export default function SourcesPage() {
+  const [toggle, setToggle] = useState(false);
   const sources = [
     { name: "Sample 1" },
     { name: "Sample 2" },
@@ -19,6 +20,7 @@ export default function SourcesPage() {
       className="w-screen h-screen flex"
       style={{ backgroundColor: "#D5FBE6" }}
     >
+      {toggle ? <Modal /> : ""}
       <div className="w-3/6 portrait:w-5/6  h-auto m-auto p-5 bg-white rounded-2xl flex flex-col">
         <h1 className="mx-auto text-4xl font-extrabold text-center">
           Data Source Selection
@@ -27,7 +29,7 @@ export default function SourcesPage() {
           Selct from <b>{sources.length}</b> sources
         </p>
         <div
-          className="mx-auto my-5 w-5/6 p-7 outline flex flex-row flex-wrap overflow-scroll"
+          className="mx-auto my-5 w-5/6 p-7 outline outline-gray-300 flex flex-row flex-wrap overflow-scroll"
           style={{ maxHeight: "50vh" }}
         >
           {sources.map((source) => {
@@ -83,6 +85,21 @@ function SourceIcon({ source }) {
       <h1 className="self-center mt-5 text-teal-800 opacity-0 group-hover:opacity-100 transition">
         Click to Inspect
       </h1>
+    </div>
+  );
+}
+
+function Modal() {
+  return (
+    <div className="absolute w-screen h-screen flex z-50 bg-black bg-opacity-30">
+      <div
+        className="m-auto aspect-square flex flex-col"
+        style={{ backgroundColor: "#BBDCEF", width: "45vw", height: "70vh" }}
+      >
+        <div className="w-full px-7 py-5 text-3xl flex flex-row-reverse">
+          <button>X</button>
+        </div>
+      </div>
     </div>
   );
 }
