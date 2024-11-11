@@ -1,12 +1,14 @@
 from fastapi import APIRouter
 import requests
 import json
+from .model import pitch_generation_request, pitch_generation_response
+
 router = APIRouter(
     prefix="/generation"
 )
 
-@router.get("/generate_sales_pitch")
-def generate_pitch():
+@router.post("/generate_sales_pitch")
+def generate_pitch(user_info : pitch_generation_request) -> pitch_generation_response:
     r = requests.post(
        "http://127.0.0.1:11434/api/chat",
         json={"model" : "llama3.2", "messages" : [{"role" : "user", "content" : "generate a sales pitch for a health tech company specializing in automating the RCM process", "stream" : True}]},
