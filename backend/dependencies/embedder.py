@@ -22,13 +22,10 @@ class Embedder:
 
             print(response.data[0].embedding)
             embedded_text = response.data[0].embedding
-            
+
         except Exception as error:
             print(f"{error}")
             logging.error(f"{error}")
             return None
 
         return embedded_text
-    
-embedding_obj = Embedder()
-embedding_obj.create_embedding("Hello world")
