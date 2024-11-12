@@ -168,10 +168,10 @@ function SourceIcon({ source, onClick }) {
 
 function Modal({ title, children, onClose }) {
   return (
-    <div className="absolute w-screen h-screen flex z-50 bg-black bg-opacity-30">
+    <div className="absolute w-screen h-screen flex z-50 bg-black bg-opacity-25 ">
       <div
-        className="m-auto aspect-square flex flex-col"
-        style={{ backgroundColor: "#BBDCEF", width: "45vw", height: "70vh" }}
+        className="m-auto aspect-square flex flex-col outline outline-2 outline-gray-400"
+        style={{ backgroundColor: "#BBDCEF", width: "45vw", height: "60vh" }}
       >
         <div className="w-full px-7 py-5 text-3xl flex flex-row">
           <h1 className="flex grow text-2xl">{title}</h1>
