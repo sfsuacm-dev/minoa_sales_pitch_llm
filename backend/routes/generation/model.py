@@ -6,7 +6,7 @@ class pitch_generation_request(BaseModel):
     linkedin_url : str | None=None
     product_name : str
     product_description : str
-    selected_source_ids : list[int] #list of source ids
+    selected_source_ids : list[int] | None=None #list of source ids
 
 class pitch_generation_response(BaseModel):
     generated_sales_pitch : str
