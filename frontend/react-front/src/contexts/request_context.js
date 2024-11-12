@@ -8,6 +8,7 @@ export function useRequestContext() {
 }
 
 export function RequestProvider({ children }) {
+  const SERVER = "http://localhost:3001"; //change this when server is open  //35.236.2.62:8000/sources/all_sources
   const [sellerName, setSN] = useState("");
   const [companyName, setCN] = useState("");
   const [linkedInUrl, setLURL] = useState("");
@@ -15,6 +16,7 @@ export function RequestProvider({ children }) {
   const [productDescription, setPD] = useState("");
   const [selectedSources, setSS] = useState([]);
   const value = {
+    SERVER,
     sellerName,
     companyName,
     linkedInUrl,
