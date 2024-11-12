@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Test</title>
+  </head>
+  <body>
+    <script>
+      const mockGeneratePitch = async () => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        return {
+          generated_sales_pitch: `**Introducing VidHub - The Ultimate Video Sharing Platform**
+
+Are you tired of using outdated video sharing platforms that limit your creativity and revenue potential? Look no further than VidHub, the revolutionary new platform that empowers creators to share their content with the world.
+
+**What sets us apart:**
+***Easy-to-use interface**: Our platform is designed for ease of use, even for those who aren't tech-savvy. Simply upload your videos, add tags and descriptions, and share with the world.
+***Monetization options**: Earn money from ads, sponsorships, and affiliate marketing through our integrated partner network.
+***Discoverability tools**: Get discovered by a global audience with our advanced search algorithms and social media integrations.
+***Community features**: Engage with your fans and fellow creators through live streaming, commenting, and private messaging.
+
+**Benefits for Creators:**
+***Global reach**: Share your content with millions of users worldwide, reaching new audiences and growing your fanbase.
+***Increased revenue**: Earn more from ads, sponsorships, and affiliate marketing than on traditional platforms.
+***Community building**: Connect with like-minded creators and fans through our social features.
+***Professional-grade tools**: Access advanced editing, color correction, and music licensing features to elevate your content.
+
+**Benefits for Viewers:**
+***Unlimited video content**: Browse thousands of videos on topics ranging from entertainment, education, and lifestyle.
+***Discover new creators**: Find fresh perspectives and talent through our community-driven discovery algorithm.
+***Enhanced user experience**: Enjoy a seamless viewing experience with high-quality playback and immersive features.
+
+**Join the VidHub community today!**`,
+          name_documents_used: ["Document1", "Document2", "Document3"],
+          links_to_documents: [
+            "http://examplewebsite.com/1",
+            "http://exampleWebsite.com/2",
+          ],
+        };
+      };
+
+      async function testBackend() {
+        const USE_MOCK_API = true;
+        const BASE_URL = "http://35.236.2.62:8000";
+
+        try {
+          if (USE_MOCK_API) {
+            const data = await mockGeneratePitch();
+            console.log("Mock Pitch is: ", data);
+          } else {
+            const response = await fetch(
+              `${BASE_URL}/generate/generate_sales_pitch`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  seller_name: "Test Seller",
+                  company_name: "Test Company",
+                  product_name: "Test Product",
+                  product_description: "Test Description",
+                  selected_source_ids: [1],
+                }),
+              }
+            );
+            const data = await response.json();
+            console.log("Response data: ", data);
+          }
+        } catch (error) {
+          console.error("Error: ", error);
+        }
+      }
+    </script>
+    <h1>API TEST</h1>
+    <button onclick="testBackend()">Test Generate Pitch</button>
+  </body>
+</html>

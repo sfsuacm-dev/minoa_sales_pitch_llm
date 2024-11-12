@@ -1,0 +1,17 @@
+.editor-container{
+    width: 40%;
+    position: absolute;
+    right: 2rem;
+    padding: 8px;
+    background: lightgray;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgpa(0,0,0,0.1);
+}
+
+.pitch-container{
+    flex: 1;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: inset;
+    padding: 1.5rem;
+}
