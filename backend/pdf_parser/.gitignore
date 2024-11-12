@@ -4,8 +4,7 @@ venv/
 # PDF output
 uncleanedpdf.txt
 cleanedpdf.txt
+*.csv
 
 # Ignore all downloaded Statista PDF files
 *.pdf
-
-
