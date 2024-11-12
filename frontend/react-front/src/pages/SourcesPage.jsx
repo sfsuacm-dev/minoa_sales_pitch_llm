@@ -37,7 +37,7 @@ export default function SourcesPage() {
   useEffect(() => {
     const fetchAndStore = async () => {
       try {
-        var sources = await fetch("http://localhost:3001/"); //35.236.2.62:8000/sources/all_sources
+        var sources = await fetch(values.SERVER);
         console.log(sources);
         sources = await sources.json();
         console.log(sources);
