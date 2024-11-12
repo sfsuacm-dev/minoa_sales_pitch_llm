@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import CheckMark from "../images/image.png";
+import { useRequestContext } from "../contexts/request_context";
 
 export default function SourcesPage() {
   const [toggle, setToggle] = useState(false);
@@ -14,7 +15,11 @@ export default function SourcesPage() {
     { name: "Sample 8" },
     { name: "Sample 9" },
   ];
-
+  const values = useRequestContext();
+  useEffect(() => {
+    values.setSellerName("Test Seller");
+    console.log(values);
+  }, []);
   return (
     <div
       className="w-screen h-screen flex"
