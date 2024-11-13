@@ -6,6 +6,7 @@ import styles from "./InputsPage.module.css";
 export default function InputsPage() {
   const navigate = useNavigate();
   const {
+    SERVER,
     sellerName,
     setSellerName,
     companyName,
@@ -24,7 +25,7 @@ export default function InputsPage() {
     console.log("LinkedIn URL:", linkedInUrl);
     console.log("Product Name:", productName);
     console.log("Product Description:", productDescription);
-    
+
     navigate("/sources");
   };
 
@@ -32,10 +33,32 @@ export default function InputsPage() {
     <div>
       <nav className={styles.nav}>
         <div className={styles.logo}>
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M2 17L12 22L22 17" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M2 12L12 17L22 12" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L2 7L12 12L22 7L12 2Z"
+              stroke="#0f172a"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M2 17L12 22L22 17"
+              stroke="#0f172a"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M2 12L12 17L22 12"
+              stroke="#0f172a"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
           Minoa
         </div>
@@ -45,13 +68,25 @@ export default function InputsPage() {
           <a href="/">Resources</a>
           <a href="/">Careers</a>
           <a href="/">About</a>
-          <a href="/" className={`${styles.button} ${styles.buttonOutline}`}>Login</a>
-          <a href="/" className={`${styles.button} ${styles.buttonFilled}`}>Book a demo</a>
+          <a href="/" className={`${styles.button} ${styles.buttonOutline}`}>
+            Login
+          </a>
+          <a href="/" className={`${styles.button} ${styles.buttonFilled}`}>
+            Book a demo
+          </a>
         </div>
       </nav>
       <main className={styles.mainContent}>
-        <h1 className={styles.heroTitle}>One platform for modern sales teams to save time and close deals faster</h1>
-        <p className={styles.heroSubtitle}>Leverage our AI agent to instantly research your clients and get the insights you need in minutes.<br/>No more manual searches or wasted hours.</p>
+        <h1 className={styles.heroTitle}>
+          One platform for modern sales teams to save time and close deals
+          faster
+        </h1>
+        <p className={styles.heroSubtitle}>
+          Leverage our AI agent to instantly research your clients and get the
+          insights you need in minutes.
+          <br />
+          No more manual searches or wasted hours.
+        </p>
         <div className={styles.inputSection}>
           <div className={styles.inputGroup}>
             <label htmlFor="name">Full Name</label>

@@ -3,11 +3,13 @@ import { Editor } from "@tinymce/tinymce-react";
 import "../../src/styles/PitchPage.css";
 import ReactMarkdown from "react-markdown";
 import styles from "./InputsPage.module.css";
+import { useRequestContext } from "../contexts/request_context";
 
 export default function PitchPage() {
+  const values = useRequestContext();
   const [notes, setNotes] = useState("");
-  const [resultData, setResultData] = useState(""); //display result on page
-  const BASE_URL = "http://35.236.2.62:8000";
+  const [resultData, setResultData] = useState(" Initial Value"); //display result on page
+  const BASE_URL = values.SERVER;
 
   const handleEditorChange = (content) => {
     setNotes(content);
@@ -23,10 +25,11 @@ export default function PitchPage() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            seller_name: "Test Seller",
-            company_name: "Test Company",
-            product_name: "Test Product",
-            product_description: "Test Description",
+            seller_name: values.sellerName,
+            company_name: values.companyName,
+            linkedin_url: values.linkedInUrl,
+            product_name: values.productName,
+            product_description: values.productDesciption,
             selected_source_ids: [1],
           }),
         }
@@ -101,7 +104,7 @@ export default function PitchPage() {
       <div className="editor-container">
         <Editor
           apiKey="rncicr4pa0ungw5lzix98tz61buq6rodfdnx37txoh1hi0se"
-          value={notes}
+          value={resultData}
           init={{
             height: 350,
             menubar: false,
@@ -130,7 +133,7 @@ export default function PitchPage() {
             skin: "oxide", // Use the default light theme
             content_css: "default", // Use the default content CSS
           }}
-          onEditorChange={handleEditorChange}
+          onEditorChange={() => {}}
         />
       </div>
     </div>
