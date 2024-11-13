@@ -1,7 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./InputsPage.module.css";
 
 export default function InputsPage() {
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    navigate('/pitch');
+  };
+
   return (
     <div>
       <nav className={styles.nav}>
@@ -39,7 +46,19 @@ export default function InputsPage() {
             <label htmlFor="linkedin">LinkedIn URL</label>
             <input type="url" id="linkedin" placeholder="Enter your LinkedIn profile URL"/>
           </div>
-          <button className={styles.generateButton}>Next</button>
+          <div className={styles.inputGroup}>
+            <label htmlFor="productName">Product Name</label>
+            <input type="text" id="productName" placeholder="Enter your product name"/>
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="productDescription">Product Description</label>
+            <textarea 
+              id="productDescription" 
+              placeholder="Enter a brief description of your product"
+              rows="3"
+            />
+          </div>
+          <button className={styles.generateButton} onClick={handleNext}>Next</button>
         </div>
       </main>
     </div>
