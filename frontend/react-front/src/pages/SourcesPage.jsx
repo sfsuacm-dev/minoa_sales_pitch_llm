@@ -171,7 +171,7 @@ function SourceIcon({ source, onClick, onSelect }) {
   const [toggle, setToggle] = useState(false);
   return (
     <div
-      className="w-36 hover:scale-110 transition aspect-square mx-auto mb-5 rounded-lg hover:cursor-pointer flex flex-col group relative"
+      className="w-36 min-h-48 hover:scale-110 transition aspect-square mx-auto mb-5 rounded-lg hover:cursor-pointer flex flex-col group relative"
       style={{ backgroundColor: "#BBE3EC" }}
     >
       <div
@@ -204,8 +204,8 @@ function SourceIcon({ source, onClick, onSelect }) {
           </button>
         </div>
       </div>
-      <h1 className="self-center">{source.source_name}</h1>
-      <h1 className="self-center mt-5 text-teal-800 opacity-0 group-hover:opacity-100 transition">
+      <h1 className="self-center text-center">{source.source_name}</h1>
+      <h1 className="self-center mt-2 text-teal-800 opacity-0 group-hover:opacity-100 transition">
         Click to Inspect
       </h1>
     </div>
