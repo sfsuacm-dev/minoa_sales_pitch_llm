@@ -4,10 +4,12 @@ import os
 
 class FirestoreWorker:
     def __init__(self):
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        credentials_path = os.path.join(script_dir, "../minoa-llm-firebase-adminsdk-km1gz-04fc7e35be.json" )
-        cred = credentials.Certificate(credentials_path)
-        firebase_admin.initialize_app(cred)
+        
+        if not firebase_admin._apps:
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            credentials_path = os.path.join(script_dir, "../minoa-llm-firebase-adminsdk-km1gz-04fc7e35be.json" )
+            cred = credentials.Certificate(credentials_path)
+            firebase_admin.initialize_app(cred)
 
         self.db_engine = firestore.client()
 
