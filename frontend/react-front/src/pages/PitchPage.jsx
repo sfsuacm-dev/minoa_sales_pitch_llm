@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import "../../src/styles/PitchPage.css";
 import ReactMarkdown from "react-markdown";
@@ -15,10 +15,29 @@ export default function PitchPage() {
     setNotes(content);
   };
 
+  useEffect(() => {
+    generatePitch();
+  }, []);
+
+  /*
+REQUEST SCHEMA
+{
+  "seller_name": "string",
+  "company_name": "string",
+  "linkedin_url": "string",
+  "product_name": "string",
+  "product_description": "string",
+  "selected_source_ids": [
+    0
+  ]
+}
+  */
+
   const generatePitch = async () => {
+    console.log(BASE_URL + "/generation/generate_sales_pitch");
     try {
       const response = await fetch(
-        `${BASE_URL}/generate/generate_sales_pitch`,
+        BASE_URL + "/generation/generate_sales_pitch",
         {
           method: "POST",
           headers: {
@@ -30,7 +49,7 @@ export default function PitchPage() {
             linkedin_url: values.linkedInUrl,
             product_name: values.productName,
             product_description: values.productDesciption,
-            selected_source_ids: [1],
+            selected_source_ids: values.selected_source_ids,
           }),
         }
       );

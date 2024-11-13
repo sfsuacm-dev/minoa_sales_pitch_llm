@@ -38,7 +38,7 @@ export default function SourcesPage() {
   useEffect(() => {
     const fetchAndStore = async () => {
       try {
-        var sources = await fetch(values.SERVER);
+        var sources = await fetch(values.SERVER + "/sources/all_sources");
         console.log(sources);
         sources = await sources.json();
         console.log(sources);

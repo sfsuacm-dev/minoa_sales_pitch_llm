@@ -8,7 +8,7 @@ export function useRequestContext() {
 }
 
 export function RequestProvider({ children }) {
-  const SERVER = "35.236.2.62:8000"; //change this when server is open  //35.236.2.62:8000
+  const SERVER = "http://35.235.122.90:8000"; //change this when server is open  //35.236.2.62:8000
   const [sellerName, setSN] = useState("");
   const [companyName, setCN] = useState("");
   const [linkedInUrl, setLURL] = useState("");
