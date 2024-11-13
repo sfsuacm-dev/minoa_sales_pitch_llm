@@ -10,17 +10,7 @@ export default function SourcesPage() {
   const [toggle, setToggle] = useState(false); //modal toggle
   const [modal, setModal] = useState({ title: "", content: "" });
   var selectedSources = []; //the sources submitted with the request
-  const [sources, setSources] = useState([
-    { source_id: 0, source_name: "Sample 1" },
-    { source_id: 1, source_name: "Sample 2" },
-    { source_id: 2, source_name: "Sample 3" },
-    { source_id: 3, source_name: "Sample 4" },
-    { source_id: 4, source_name: "Sample 5" },
-    { source_id: 5, source_name: "Sample 6" },
-    { source_id: 6, source_name: "Sample 7" },
-    { source_id: 7, source_name: "Sample 8" },
-    { source_id: 8, source_name: "Sample 9" },
-  ]);
+  const [sources, setSources] = useState([]);
   /*
     GET sources/all_sources
     REQUEST MODEL

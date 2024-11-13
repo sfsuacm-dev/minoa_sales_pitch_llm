@@ -48,8 +48,8 @@ REQUEST SCHEMA
             company_name: values.companyName,
             linkedin_url: values.linkedInUrl,
             product_name: values.productName,
-            product_description: values.productDesciption,
-            selected_source_ids: values.selected_source_ids,
+            product_description: values.productDescription,
+            selected_source_ids: values.selectedSources,
           }),
         }
       );
