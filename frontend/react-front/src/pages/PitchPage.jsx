@@ -6,7 +6,7 @@ import styles from "./InputsPage.module.css";
 
 export default function PitchPage() {
   const [notes, setNotes] = useState("");
-  const [resultData, setResultData] = useState(""); //display result on webpage
+  const [resultData, setResultData] = useState(""); //display result on page
   const BASE_URL = "http://35.236.2.62:8000";
 
   const handleEditorChange = (content) => {
