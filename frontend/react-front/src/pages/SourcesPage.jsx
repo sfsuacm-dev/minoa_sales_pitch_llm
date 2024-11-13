@@ -49,10 +49,11 @@ export default function SourcesPage() {
       }
     };
     fetchAndStore();
+    console.log(values);
   }, []);
 
   async function submitSources() {
-    await values.setSelectedSources(selectedSources);
+    values.setSelectedSources(selectedSources);
     navigate("/pitch");
   }
 
