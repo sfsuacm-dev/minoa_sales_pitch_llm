@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 import logging
 
+
 class Embedder:
     def __init__(self):
         env_path = Path("..") / 'secrets.env'
@@ -12,7 +13,7 @@ class Embedder:
         
         self.openai_client = OpenAI(api_key=openai_api_key)
 
-    def create_embedding(self, text_chunk):
+    def create_embedding(self, text_chunk) -> Vector:
         try:
             response = self.openai_client.embeddings.create(
                 input=text_chunk,

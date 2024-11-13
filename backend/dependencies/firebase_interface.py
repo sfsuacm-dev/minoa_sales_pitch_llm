@@ -1,9 +1,12 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
+import os
 
-class FirebaseWorker:
+class FirestoreWorker:
     def __init__(self):
-        cred = credentials.Certificate("../minoa-llm-firebase-adminsdk-km1gz-04fc7e35be.json")
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        credentials_path = os.path.join(script_dir, "../minoa-llm-firebase-adminsdk-km1gz-04fc7e35be.json" )
+        cred = credentials.Certificate(credentials_path)
         firebase_admin.initialize_app(cred)
 
         self.db_engine = firestore.client()
@@ -29,8 +32,3 @@ class FirebaseWorker:
             sources_json.append(new_source_dict)
 
         return sources_json
-
-
-firestore_stuff = FirebaseWorker()
-sources_json = firestore_stuff.get_rag_sources_types()
-print(sources_json)
