@@ -1,5 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
+from .embedder import Embedder
+from google.cloud.firestore_v1.vector import Vector
 import os
 
 class FirestoreWorker:
@@ -13,8 +15,34 @@ class FirestoreWorker:
 
         self.db_engine = firestore.client()
 
-    def write_rag_document_chunk(self, document_title : str, document_chunk : str, source_classification : str):
-        pass
+    def write_rag_document_chunk(self, document_title : str, document_chunk : str, source_classification_id : int):
+        """
+        firestore schema
+        {
+            text_chunk_id : int or uuid,
+            text : str,
+            embedding : [],
+            document_title : str,
+            source_classification_id : int
+        }
+        """
+        embedder_obj = Embedder()
+        text_to_embed = document_title + " " + document_chunk
+        embedding = embedder_obj.create_embedding(text_to_embed)
+
+        if embedding is None:
+            return
+        
+        text_embedding = Vector(embedding)
+
+        firestore_text_chunk = {
+            "title" : document_title,
+            "text" : document_chunk,
+            "embedding" : text_embedding,
+            "source_classification" : source_classification_id
+        }
+
+        self.db_engine.collection("text_chunks").document().set(firestore_text_chunk)
 
     def search_rag_similar_documents(self, query_embedding : list[float]):
         pass
