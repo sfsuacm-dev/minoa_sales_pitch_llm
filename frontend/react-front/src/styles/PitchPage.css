@@ -1,0 +1,38 @@
+.main{
+min-height: 100vmax;
+background-color: #b4f8ec;
+}
+
+
+.editor-container{
+    width: 40%;
+    position: absolute;
+    border: 4px solid lightgrey;
+    border-radius: 15px;
+    right: 2rem;
+    background: lightgray;
+    box-shadow: 0 2px 4px rgpa(0,0,0,0.1);
+}
+
+.pitch-container{
+    left: 1rem;
+    border: 4px solid lightgrey;
+    border-radius: 25px;
+    max-width: 50%;
+    position: absolute;
+    background-color: white;
+    box-shadow: inset;
+    padding: 2.5rem;
+    overflow-y: auto;
+}
+
+.pitch-container::-webkit-scrollbar{
+    display: none;
+}
+
+.banner-name{
+margin: 15px;
+font-size: 24px;
+font-weight: 600;
+color: #1f2937;
+}

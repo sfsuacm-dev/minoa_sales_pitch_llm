@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CheckMark from "../images/image.png";
 import { useRequestContext } from "../contexts/request_context";
+import styles from "./InputsPage.module.css";
 
 export default function SourcesPage() {
   const navigate = useNavigate(); //for redirecting to other pages
@@ -9,17 +10,7 @@ export default function SourcesPage() {
   const [toggle, setToggle] = useState(false); //modal toggle
   const [modal, setModal] = useState({ title: "", content: "" });
   var selectedSources = []; //the sources submitted with the request
-  const [sources, setSources] = useState([
-    { source_id: 0, source_name: "Sample 1" },
-    { source_id: 1, source_name: "Sample 2" },
-    { source_id: 2, source_name: "Sample 3" },
-    { source_id: 3, source_name: "Sample 4" },
-    { source_id: 4, source_name: "Sample 5" },
-    { source_id: 5, source_name: "Sample 6" },
-    { source_id: 6, source_name: "Sample 7" },
-    { source_id: 7, source_name: "Sample 8" },
-    { source_id: 8, source_name: "Sample 9" },
-  ]);
+  const [sources, setSources] = useState([]);
   /*
     GET sources/all_sources
     REQUEST MODEL
@@ -37,7 +28,7 @@ export default function SourcesPage() {
   useEffect(() => {
     const fetchAndStore = async () => {
       try {
-        var sources = await fetch("http://localhost:3001/"); //35.236.2.62:8000/sources/all_sources
+        var sources = await fetch(values.SERVER + "/sources/all_sources");
         console.log(sources);
         sources = await sources.json();
         console.log(sources);
@@ -48,18 +39,64 @@ export default function SourcesPage() {
       }
     };
     fetchAndStore();
+    console.log(values);
   }, []);
 
   async function submitSources() {
-    await values.setSelectedSources(selectedSources);
+    values.setSelectedSources(selectedSources);
     navigate("/pitch");
   }
 
   return (
     <div
-      className="w-screen h-screen flex"
+      className="w-screen h-screen flex flex-col"
       style={{ backgroundColor: "#D5FBE6" }}
     >
+      <nav className={styles.nav}>
+        <div className={styles.logo}>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L2 7L12 12L22 7L12 2Z"
+              stroke="#0f172a"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M2 17L12 22L22 17"
+              stroke="#0f172a"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M2 12L12 17L22 12"
+              stroke="#0f172a"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Minoa
+        </div>
+        <div className={styles.navLinks}>
+          <a href="/">Home</a>
+          <a href="/">Product</a>
+          <a href="/">Resources</a>
+          <a href="/">Careers</a>
+          <a href="/">About</a>
+          <a href="/" className={`${styles.button} ${styles.buttonOutline}`}>
+            Login
+          </a>
+          <a href="/" className={`${styles.button} ${styles.buttonFilled}`}>
+            Book a demo
+          </a>
+        </div>
+      </nav>
       {toggle ? (
         <Modal
           onClose={() => {
@@ -92,6 +129,14 @@ export default function SourcesPage() {
                   setToggle(!toggle);
                   setModal({ title: source.source_name, content: "" });
                 }}
+                onSelect={(x) => {
+                  if (x) selectedSources.push(source.source_id);
+                  else {
+                    const index = selectedSources.indexOf(x);
+                    // index > 0 ? selectedSources.slice() : "";
+                  }
+                  console.log(selectedSources);
+                }}
               />
             );
           })}
@@ -122,11 +167,11 @@ export default function SourcesPage() {
 } //end of Sources Page
 
 // Additional Components
-function SourceIcon({ source, onClick }) {
+function SourceIcon({ source, onClick, onSelect }) {
   const [toggle, setToggle] = useState(false);
   return (
     <div
-      className="w-36 hover:scale-110 transition aspect-square mx-auto mb-5 rounded-lg hover:cursor-pointer flex flex-col group relative"
+      className="w-36 min-h-48 hover:scale-110 transition aspect-square mx-auto mb-5 rounded-lg hover:cursor-pointer flex flex-col group relative"
       style={{ backgroundColor: "#BBE3EC" }}
     >
       <div
@@ -139,6 +184,7 @@ function SourceIcon({ source, onClick }) {
         <div
           className="w-fit h-fit p-2 z-10"
           onClick={() => {
+            onSelect(!toggle);
             setToggle(!toggle);
           }}
         >
@@ -158,8 +204,8 @@ function SourceIcon({ source, onClick }) {
           </button>
         </div>
       </div>
-      <h1 className="self-center">{source.source_name}</h1>
-      <h1 className="self-center mt-5 text-teal-800 opacity-0 group-hover:opacity-100 transition">
+      <h1 className="self-center text-center">{source.source_name}</h1>
+      <h1 className="self-center mt-2 text-teal-800 opacity-0 group-hover:opacity-100 transition">
         Click to Inspect
       </h1>
     </div>
@@ -168,10 +214,10 @@ function SourceIcon({ source, onClick }) {
 
 function Modal({ title, children, onClose }) {
   return (
-    <div className="absolute w-screen h-screen flex z-50 bg-black bg-opacity-30">
+    <div className="absolute w-screen h-screen flex z-50 bg-black bg-opacity-25 ">
       <div
-        className="m-auto aspect-square flex flex-col"
-        style={{ backgroundColor: "#BBDCEF", width: "45vw", height: "70vh" }}
+        className="m-auto aspect-square flex flex-col outline outline-2 outline-gray-400"
+        style={{ backgroundColor: "#BBDCEF", width: "45vw", height: "60vh" }}
       >
         <div className="w-full px-7 py-5 text-3xl flex flex-row">
           <h1 className="flex grow text-2xl">{title}</h1>
