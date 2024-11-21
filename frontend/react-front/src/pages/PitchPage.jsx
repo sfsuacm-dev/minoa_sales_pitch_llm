@@ -4,12 +4,14 @@ import "../../src/styles/PitchPage.css";
 import ReactMarkdown from "react-markdown";
 import styles from "./InputsPage.module.css";
 import { useRequestContext } from "../contexts/request_context";
+import { useNavigate } from 'react-router-dom';
 
 export default function PitchPage() {
   const values = useRequestContext();
   const [notes, setNotes] = useState("");
   const [resultData, setResultData] = useState(" Initial Value"); //display result on page
   const BASE_URL = values.SERVER;
+  const navigate = useNavigate();
 
   const handleEditorChange = (content) => {
     setNotes(content);
@@ -58,6 +60,11 @@ REQUEST SCHEMA
     } catch (error) {
       console.error("Error generating pitch: ", error);
     }
+  };
+
+  const handleGenerateSlides = () => {
+    console.log("Sending pitch data:", resultData); // Remove after testing
+    navigate('/slide-deck', { state: { pitchData: resultData } });
   };
 
   return (
@@ -112,11 +119,16 @@ REQUEST SCHEMA
 
       <h1 className="banner-name">Generated Sales Pitch</h1>
 
-      <div className="flex gap-6">
-        {/*display generated pitch*/}
-        <div className="pitch-container">
+      <div className="flex gap-6 justify-between items-start"> {/* Moved slide button ontop of Fabians pitch editor*/}
+        <div className="pitch-container flex-grow">
           <ReactMarkdown>{resultData}</ReactMarkdown>
         </div>
+        <button 
+          onClick={handleGenerateSlides}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-auto" 
+        >
+          Generate Slides
+        </button>
       </div>
 
       {/*tinyMce integration*/}
