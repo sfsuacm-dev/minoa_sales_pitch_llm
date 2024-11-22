@@ -25,33 +25,9 @@
         .slide-background {
             background-color: #1a1a1a;
         }
-        #promptContainer {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 1000;
-            background: rgba(0,0,0,0.7);
-            padding: 10px;
-            border-radius: 5px;
-        }
-        #prompt {
-            width: 300px;
-            padding: 5px;
-        }
-        #generateBtn {
-            padding: 5px 10px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
-    <div id="promptContainer">
-        <input type="text" id="prompt" placeholder="Enter presentation topic...">
-        <button id="generateBtn">Generate Slides</button>
-    </div>
     <div class="reveal">
         <div class="slides" id="slides">
             <!-- Slides will be dynamically inserted here -->
@@ -133,26 +109,6 @@
             });
         }
 
-        async function handleGenerateSlides() {
-            const prompt = document.getElementById('prompt').value;
-            if (!prompt) {
-                alert('Please enter a presentation topic.');
-                return;
-            }
-
-            try {
-                const slides = await generateSlides(prompt);
-                createSlideElements(slides);
-                deck.sync();
-                deck.slide(0);
-            } catch (error) {
-                console.error('Failed to generate slides:', error);
-                alert('Failed to generate slides. Please check your API key and try again.');
-            }
-        }
-
-        document.getElementById('generateBtn').addEventListener('click', handleGenerateSlides);
-
         console.log('Initializing Reveal');
         deck = new Reveal({
             hash: true,
@@ -181,6 +137,25 @@
             console.error('EventSource failed:', error);
             eventSource.close();
         };
+
+        // Update the DOMContentLoaded listener
+        document.addEventListener('DOMContentLoaded', async function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pitchFromURL = urlParams.get('pitch');
+            
+            if (pitchFromURL) {
+                const decodedPitch = decodeURIComponent(pitchFromURL);
+                try {
+                    const slides = await generateSlides(decodedPitch);
+                    createSlideElements(slides);
+                    deck.sync();
+                    deck.slide(0);
+                } catch (error) {
+                    console.error('Failed to generate slides:', error);
+                    alert('Failed to generate slides. Please try again.');
+                }
+            }
+        });
     </script>
 </body>
 </html>
