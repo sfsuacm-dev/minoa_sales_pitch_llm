@@ -64,7 +64,8 @@ REQUEST SCHEMA
 
   const handleGenerateSlides = () => {
     console.log("Sending pitch data:", resultData); // Remove after testing
-    navigate('/slide-deck', { state: { pitchData: resultData } });
+    // navigate('/slide-deck', { state: { pitchData: resultData } });
+    window.open('/slidedeck/reveal.js/index.html', '_blank');
   };
 
   return (
