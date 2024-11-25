@@ -4,11 +4,12 @@ import "../../src/styles/PitchPage.css";
 import ReactMarkdown from "react-markdown";
 import styles from "./InputsPage.module.css";
 import { useRequestContext } from "../contexts/request_context";
+import DownloadButton from "../components/DownloadButton";
 
 export default function PitchPage() {
   const values = useRequestContext();
   const [notes, setNotes] = useState("");
-  const [resultData, setResultData] = useState(" Initial Value"); //display result on page
+  const [resultData, setResultData] = useState(testText); //display result on page
   const BASE_URL = values.SERVER;
 
   const handleEditorChange = (content) => {
@@ -109,9 +110,8 @@ REQUEST SCHEMA
           </div>
         </nav>
       </div>
-
       <h1 className="banner-name">Generated Sales Pitch</h1>
-
+      <DownloadButton content={resultData} />
       <div className="flex gap-6">
         {/*display generated pitch*/}
         <div className="pitch-container">
@@ -158,3 +158,6 @@ REQUEST SCHEMA
     </div>
   );
 }
+
+const testText =
+  "**Introducing VidHub - The Ultimate Video Sharing Platform** Are you tired of using outdated video sharing platforms that limit your creativity and revenue potential? Look no further than VidHub, the revolutionary new platform that empowers creators to share their content with the world. **What sets us apart:** * **Easy-to-use interface**: Our platform is designed for ease of use, even for those who aren't tech-savvy. Simply upload your videos, add tags and descriptions, and share with the world. * **Monetization options**: Earn money from ads, sponsorships, and affiliate marketing through our integrated partner network. * **Discoverability tools**: Get discovered by a global audience with our advanced search algorithms and social media integrations. * **Community features**: Engage with your fans and fellow creators through live streaming, commenting, and private messaging. **Benefits for Creators:** * **Global reach**: Share your content with millions of users worldwide, reaching new audiences and growing your fanbase. * **Increased revenue**: Earn more from ads, sponsorships, and affiliate marketing than on traditional platforms. * **Community building**: Connect with like-minded creators and fans through our social features. * **Professional-grade tools**: Access advanced editing, color correction, and music licensing features to elevate your content. **Benefits for Viewers:** * **Unlimited video content**: Browse thousands of videos on topics ranging from entertainment, education, and lifestyle. * **Discover new creators**: Find fresh perspectives and talent through our community-driven discovery algorithm. * **Enhanced user experience**: Enjoy a seamless viewing experience with high-quality playback and immersive features. **Join the VidHub community today!**";

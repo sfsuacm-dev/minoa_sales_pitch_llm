@@ -127,7 +127,10 @@ export default function SourcesPage() {
                 key={source.source_id}
                 onClick={() => {
                   setToggle(!toggle);
-                  setModal({ title: source.source_name, content: "" });
+                  setModal({
+                    title: source.source_name,
+                    content: source.source_description,
+                  });
                 }}
                 onSelect={(x) => {
                   if (x) selectedSources.push(source.source_id);
