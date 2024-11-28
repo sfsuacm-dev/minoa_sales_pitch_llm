@@ -5,12 +5,14 @@ import ReactMarkdown from "react-markdown";
 import styles from "./InputsPage.module.css";
 import { useRequestContext } from "../contexts/request_context";
 import DownloadButton from "../components/DownloadButton";
+import { useNavigate } from "react-router-dom";
 
 export default function PitchPage() {
   const values = useRequestContext();
   const [notes, setNotes] = useState("");
-  const [resultData, setResultData] = useState(testText); //display result on page
+  const [resultData, setResultData] = useState("Pitch Loading..."); //display result on page
   const BASE_URL = values.SERVER;
+  const navigate = useNavigate();
 
   const handleEditorChange = (content) => {
     setNotes(content);
@@ -59,6 +61,14 @@ REQUEST SCHEMA
     } catch (error) {
       console.error("Error generating pitch: ", error);
     }
+  };
+
+  const handleGenerateSlides = () => {
+    const encodedPitch = encodeURIComponent(resultData);
+    window.open(
+      `/slidedeck/reveal.js/index.html?pitch=${encodedPitch}`,
+      "_blank"
+    );
   };
 
   return (
@@ -110,14 +120,20 @@ REQUEST SCHEMA
           </div>
         </nav>
       </div>
-      <h1 className="banner-name">Generated Sales Pitch</h1>
-      <DownloadButton content={resultData} />
-      <div className="flex gap-6">
-        {/*display generated pitch*/}
-        <div className="pitch-container">
+      <div className="flex gap-6 justify-between items-start">
+        {/* Moved slide button ontop of Fabians pitch editor*/}
+        <div className="pitch-container flex-grow">
           <ReactMarkdown>{resultData}</ReactMarkdown>
         </div>
+        <button
+          onClick={handleGenerateSlides}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-auto"
+        >
+          Generate Slides
+        </button>
+        <DownloadButton content={resultData} />
       </div>
+      <h1 className="banner-name">Generated Sales Pitch</h1>
 
       {/*tinyMce integration*/}
       <div className="editor-container">

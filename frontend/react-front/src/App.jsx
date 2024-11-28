@@ -4,6 +4,7 @@ import { ResponseProvider } from "./contexts/response_context";
 import InputsPage from "./pages/InputsPage";
 import SourcesPage from "./pages/SourcesPage";
 import PitchPage from "./pages/PitchPage";
+import SlideDeck from "./pages/SlideDeck";
 //page transitions
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -47,6 +48,19 @@ function AnimationRoutes() {
               exit={{ opacity: 0 }}
             >
               <PitchPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/slide-deck"
+          element={
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+            >
+              <SlideDeck />
             </motion.div>
           }
         />
