@@ -11,8 +11,10 @@ export default function InputsPage() {
     setSellerName,
     companyName,
     setCompanyName,
-    linkedInUrl,
-    setLinkedInURL,
+    clientName,
+    setClientName,
+    clientAdditionalInfo,
+    setClientAdditionalInfo,
     productName,
     setProductName,
     productDescription,
@@ -22,7 +24,7 @@ export default function InputsPage() {
   const handleNext = () => {
     console.log("Seller Name:", sellerName);
     console.log("Company Name:", companyName);
-    console.log("LinkedIn URL:", linkedInUrl);
+    console.log("Client's Name:", clientName);
     console.log("Product Name:", productName);
     console.log("Product Description:", productDescription);
 
@@ -109,17 +111,15 @@ export default function InputsPage() {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="linkedin">LinkedIn URL</label>
+            <label htmlFor="clientName">Client's Name</label>
             <input
-              type="url"
-              id="linkedin"
-              placeholder="Enter your LinkedIn profile URL"
-              value={linkedInUrl}
-              onChange={(e) => setLinkedInURL(e.target.value)}
+              type="text"
+              id="clientName"
+              placeholder="Enter client's name (e.g. John from Minoa)"
+              value={clientName}
+              onChange={(e) => setClientName(e.target.value)}
             />
           </div>
-          <div className={styles.inputGroup}>
-            <label htmlFor="productName">Product Name</label>
             <input
               type="text"
               id="productName"

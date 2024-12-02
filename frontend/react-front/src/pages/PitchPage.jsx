@@ -49,7 +49,8 @@ REQUEST SCHEMA
           body: JSON.stringify({
             seller_name: values.sellerName,
             company_name: values.companyName,
-            linkedin_url: values.linkedInUrl,
+            client_name: values.clientName,
+            client_additional_info: values.clientAdditionalInfo,
             product_name: values.productName,
             product_description: values.productDescription,
             selected_source_ids: values.selectedSources,
