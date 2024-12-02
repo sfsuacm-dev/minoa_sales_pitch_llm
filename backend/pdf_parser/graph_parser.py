@@ -68,7 +68,7 @@ def main():
 
     results_csv_path = os.path.join(script_dir, "results.csv")
 
-    with open(results_csv_path, mode="a", newline="", encoding="utf-8") as csv_file:
+    with open(results_csv_path, mode="w", newline="", encoding="utf-8") as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(["Title", "Chunk"])
 
