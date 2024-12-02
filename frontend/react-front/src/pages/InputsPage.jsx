@@ -17,6 +17,8 @@ export default function InputsPage() {
     setProductName,
     productDescription,
     setProductDescription,
+    clientAdditionalInfo,
+    setClientAdditionalInfo,
   } = useRequestContext();
 
   const handleNext = () => {
@@ -116,6 +118,16 @@ export default function InputsPage() {
               placeholder="Enter client's name"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="clientAdditionalInfo">Additional Client Information</label>
+            <textarea
+              id="clientAdditionalInfo"
+              placeholder="Enter any additional information about your client"
+              rows="3"
+              value={clientAdditionalInfo}
+              onChange={(e) => setClientAdditionalInfo(e.target.value)}
             />
           </div>
           <div className={styles.inputGroup}>
