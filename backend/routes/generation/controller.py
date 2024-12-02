@@ -9,11 +9,7 @@ router = APIRouter(
 
 @router.post("/generate_sales_pitch")
 async def generate_pitch(user_info : pitch_generation_request) -> pitch_generation_response:
-    prompt = create_prompt(user_info)
-    
-    llm_response = call_llm(prompt)
-    sales_pitch = llm_response["message"]["content"]
-
-    return {"generated_sales_pitch" : sales_pitch}
+    pitch_response = await driver(user_info)
 
 
+    return pitch_response
