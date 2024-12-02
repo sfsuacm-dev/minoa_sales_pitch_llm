@@ -1,6 +1,7 @@
-from .model import pitch_generation_request
+from .model import pitch_generation_request, pitch_generation_response
 import requests
 import json
+from ...dependencies.firebase_interface import *
 
 def call_llm(prompt : str):
     r = requests.post(
@@ -27,12 +28,38 @@ def call_llm(prompt : str):
             return {"message" : message}
         
 #return relevant document names and content
-async def vector_search_relevant_docs(source_selection_ids : list[int]):
-    pass
+async def vector_search_relevant_docs(sales_information : pitch_generation_request, source_selection_ids : list[int]):
+    firebase_worker = FirestoreWorker()
+    rag_prompt = f"""
+    Company name: {sales_information.company_name},
+    Product name: {sales_information.product_name},
+    Product description: {sales_information.product_description}
+    """
+    related_documents = firebase_worker.search_rag_similar_documents(rag_prompt, source_selection_ids)
 
-#needs to return linkedin info 
-async def get_linkedin_info(linkedin_link : str):
-    pass
+    #process relevant docs into string
+    retrieved_sources_str = ""
+
+    source_names = set()
+
+    for i in range(len(related_documents)):
+        document_as_dict = related_documents[i].to_dict()
+        
+        document_number = str(i + 1)
+        document_title = document_as_dict["title"]
+        document_text_chunk = document_as_dict["text"]
+
+        combined_string = (
+            f"DOCUMENT: {document_number}\n" 
+            + f"Document Title: {document_title}\n" 
+            + f"Document Chunk: {document_text_chunk}\n\n"
+        )
+
+        source_names.add(document_title)
+             
+        retrieved_sources_str += combined_string
+    
+    return retrieved_sources_str, source_names
 
 async def get_perplexity_response(prompt : str):
     pass
@@ -40,9 +67,29 @@ async def get_perplexity_response(prompt : str):
 #should be a mix of the LINKEDIN information, 
 #perplexity information
 #and retrieved rag information
-def create_prompt(pitch_request : pitch_generation_request=None, linkedin_info : dict=None, rag_context : list[str]=None, perplexity_info : dict=None):
-    prompt = f"Create a sales pitch for a \
-    company named {pitch_request.company_name}. The product name is {pitch_request.product_name}. \
-    A description of the product is {pitch_request.product_description}"
+async def driver(sales_pitch_request : pitch_generation_request, source_selection_ids : list[int] | None=None):
 
-    return prompt
+    documents_embed_str, document_names = await vector_search_relevant_docs(sales_pitch_request, source_selection_ids)    
+
+    prompt = f"""
+    Create a sales pitch for a company named {sales_pitch_request.company_name}. 
+    The product that needs to be pitched is called {sales_pitch_request.product_name}.
+    Here is some information about the product that needs to be pitched: {sales_pitch_request.product_description}.
+
+    From a RAG system, we retrieved some text chunks from various documents. Here is the information that was retrieved:
+    {documents_embed_str}
+
+    Use ONLY the relevant information returned by the mentioned RAG system. Feel free to leave out information that is not related.
+    When you use a document that is returned from the RAG system, cite the source TITLE NOT the document number.
+
+    Discuss specifically how this product beats out other products on the market.
+
+    DO NOT HALLUCINATE and DO NOT makeup information likes sale codes. 
+    """ 
+
+    sales_pitch_text = call_llm(prompt)["message"]["content"]
+
+    return pitch_generation_response(
+        generated_sales_pitch=sales_pitch_text,
+        name_documents_used=list(document_names)
+    )
