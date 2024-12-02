@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRequestContext } from "../contexts/request_context";
 import styles from "./InputsPage.module.css";
-// Delete this line
+
 export default function InputsPage() {
   const navigate = useNavigate();
   const {
@@ -11,20 +11,18 @@ export default function InputsPage() {
     setSellerName,
     companyName,
     setCompanyName,
-    clientName,
-    setClientName,
+    linkedInUrl,
+    setLinkedInURL,
     productName,
     setProductName,
     productDescription,
     setProductDescription,
-    clientAdditionalInfo,
-    setClientAdditionalInfo,
   } = useRequestContext();
 
   const handleNext = () => {
     console.log("Seller Name:", sellerName);
     console.log("Company Name:", companyName);
-    console.log("Client's Name:", clientName);
+    console.log("LinkedIn URL:", linkedInUrl);
     console.log("Product Name:", productName);
     console.log("Product Description:", productDescription);
 
@@ -111,23 +109,13 @@ export default function InputsPage() {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="clientName">Client's Name</label>
+            <label htmlFor="linkedin">LinkedIn URL</label>
             <input
-              type="text"
-              id="clientName"
-              placeholder="Enter client's name"
-              value={clientName}
-              onChange={(e) => setClientName(e.target.value)}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label htmlFor="clientAdditionalInfo">Additional Client Information</label>
-            <textarea
-              id="clientAdditionalInfo"
-              placeholder="Enter any additional information about your client"
-              rows="3"
-              value={clientAdditionalInfo}
-              onChange={(e) => setClientAdditionalInfo(e.target.value)}
+              type="url"
+              id="linkedin"
+              placeholder="Enter your LinkedIn profile URL"
+              value={linkedInUrl}
+              onChange={(e) => setLinkedInURL(e.target.value)}
             />
           </div>
           <div className={styles.inputGroup}>
