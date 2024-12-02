@@ -39,23 +39,21 @@ REQUEST SCHEMA
   const generatePitch = async () => {
     console.log(BASE_URL + "/generation/generate_sales_pitch");
     try {
-      const response = await fetch(
-        BASE_URL + "/generation/generate_sales_pitch",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            seller_name: values.sellerName,
-            company_name: values.companyName,
-            linkedin_url: values.linkedInUrl,
-            product_name: values.productName,
-            product_description: values.productDescription,
-            selected_source_ids: values.selectedSources,
-          }),
-        }
-      );
+      const response = await fetch(BASE_URL + "/generation/generate_sales_pitch", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          seller_name: values.sellerName,
+          company_name: values.companyName,
+          client_name: values.clientName,
+          client_additional_info: values.clientAdditionalInfo,
+          product_name: values.productName,
+          product_description: values.productDescription,
+          selected_source_ids: values.selectedSources
+        })
+      });
       const data = await response.json();
       setResultData(data.generated_sales_pitch);
     } catch (error) {

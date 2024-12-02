@@ -11,18 +11,20 @@ export default function InputsPage() {
     setSellerName,
     companyName,
     setCompanyName,
-    linkedInUrl,
-    setLinkedInURL,
+    clientName,
+    setClientName,
     productName,
     setProductName,
     productDescription,
     setProductDescription,
+    clientAdditionalInfo,
+    setClientAdditionalInfo,
   } = useRequestContext();
 
   const handleNext = () => {
     console.log("Seller Name:", sellerName);
     console.log("Company Name:", companyName);
-    console.log("LinkedIn URL:", linkedInUrl);
+    console.log("Client's Name:", clientName);
     console.log("Product Name:", productName);
     console.log("Product Description:", productDescription);
 
@@ -109,13 +111,23 @@ export default function InputsPage() {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="linkedin">LinkedIn URL</label>
+            <label htmlFor="clientName">Client's Name</label>
             <input
-              type="url"
-              id="linkedin"
-              placeholder="Enter your LinkedIn profile URL"
-              value={linkedInUrl}
-              onChange={(e) => setLinkedInURL(e.target.value)}
+              type="text"
+              id="clientName"
+              placeholder="Enter client's name"
+              value={clientName}
+              onChange={(e) => setClientName(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="clientAdditionalInfo">Additional Client Information</label>
+            <textarea
+              id="clientAdditionalInfo"
+              placeholder="Enter any additional information about your client"
+              rows="3"
+              value={clientAdditionalInfo}
+              onChange={(e) => setClientAdditionalInfo(e.target.value)}
             />
           </div>
           <div className={styles.inputGroup}>
