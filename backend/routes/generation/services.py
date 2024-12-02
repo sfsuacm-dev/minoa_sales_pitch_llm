@@ -1,4 +1,4 @@
-from .model import pitch_generation_request
+from .model import pitch_generation_request, pitch_generation_response
 import requests
 import json
 from ...dependencies.firebase_interface import *
@@ -40,6 +40,8 @@ async def vector_search_relevant_docs(sales_information : pitch_generation_reque
     #process relevant docs into string
     retrieved_sources_str = ""
 
+    source_names = set()
+
     for i in range(len(related_documents)):
         document_as_dict = related_documents[i].to_dict()
         
@@ -52,10 +54,12 @@ async def vector_search_relevant_docs(sales_information : pitch_generation_reque
             + f"Document Title: {document_title}\n" 
             + f"Document Chunk: {document_text_chunk}\n\n"
         )
+
+        source_names.add(document_title)
              
         retrieved_sources_str += combined_string
     
-    return retrieved_sources_str
+    return retrieved_sources_str, source_names
 
 async def get_perplexity_response(prompt : str):
     pass
@@ -63,9 +67,9 @@ async def get_perplexity_response(prompt : str):
 #should be a mix of the LINKEDIN information, 
 #perplexity information
 #and retrieved rag information
-async def create_prompt(sales_pitch_request : pitch_generation_request, source_selection_ids : list[int] | None=None):
+async def driver(sales_pitch_request : pitch_generation_request, source_selection_ids : list[int] | None=None):
 
-    documents_embed_str = await vector_search_relevant_docs(sales_pitch_request, source_selection_ids)    
+    documents_embed_str, document_names = await vector_search_relevant_docs(sales_pitch_request, source_selection_ids)    
 
     prompt = f"""
     Create a sales pitch for a company named {sales_pitch_request.company_name}. 
@@ -83,4 +87,9 @@ async def create_prompt(sales_pitch_request : pitch_generation_request, source_s
     DO NOT HALLUCINATE and DO NOT makeup information likes sale codes. 
     """ 
 
-    return prompt
+    sales_pitch_text = call_llm(prompt)["message"]["content"]
+
+    return pitch_generation_response(
+        generated_sales_pitch=sales_pitch_text,
+        name_documents_used=list(document_names)
+    )
