@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRequestContext } from "../contexts/request_context";
 import styles from "./InputsPage.module.css";
-
+// Delete this line
 export default function InputsPage() {
   const navigate = useNavigate();
   const {
