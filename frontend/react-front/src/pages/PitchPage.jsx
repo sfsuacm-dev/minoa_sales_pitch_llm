@@ -50,7 +50,6 @@ REQUEST SCHEMA
             seller_name: values.sellerName,
             company_name: values.companyName,
             client_name: values.clientName,
-            client_additional_info: values.clientAdditionalInfo,
             product_name: values.productName,
             product_description: values.productDescription,
             selected_source_ids: values.selectedSources,

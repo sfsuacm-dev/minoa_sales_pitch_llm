@@ -13,8 +13,6 @@ export default function InputsPage() {
     setCompanyName,
     clientName,
     setClientName,
-    clientAdditionalInfo,
-    setClientAdditionalInfo,
     productName,
     setProductName,
     productDescription,
@@ -115,11 +113,13 @@ export default function InputsPage() {
             <input
               type="text"
               id="clientName"
-              placeholder="Enter client's name (e.g. John from Minoa)"
+              placeholder="Enter client's name"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
             />
           </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="productName">Product Name</label>
             <input
               type="text"
               id="productName"
