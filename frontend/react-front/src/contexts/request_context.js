@@ -11,7 +11,7 @@ export function RequestProvider({ children }) {
   const SERVER = "http://35.235.122.90:8000"; //change this when server is open  //35.236.2.62:8000
   const [sellerName, setSN] = useState("");
   const [companyName, setCN] = useState("");
-  const [linkedInUrl, setLURL] = useState("");
+  const [clientName, setLURL] = useState("");
   const [productName, setPN] = useState("");
   const [productDescription, setPD] = useState("");
   const [selectedSources, setSS] = useState([]);
@@ -19,7 +19,7 @@ export function RequestProvider({ children }) {
     SERVER,
     sellerName,
     companyName,
-    linkedInUrl,
+    clientName,
     productName,
     productDescription,
     selectedSources,
@@ -29,7 +29,7 @@ export function RequestProvider({ children }) {
     setCompanyName: (x) => {
       setCN(x);
     },
-    setLinkedInURL: (x) => {
+    setClientName: (x) => {
       setLURL(x);
     },
     setProductName: (x) => {
