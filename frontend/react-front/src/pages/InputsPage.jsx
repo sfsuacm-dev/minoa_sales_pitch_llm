@@ -13,6 +13,8 @@ export default function InputsPage() {
     setCompanyName,
     clientName,
     setClientName,
+    clientAdditionalInfo,
+    setClientAdditionalInfo,
     productName,
     setProductName,
     productDescription,
@@ -23,6 +25,7 @@ export default function InputsPage() {
     console.log("Seller Name:", sellerName);
     console.log("Company Name:", companyName);
     console.log("Client's Name:", clientName);
+    console.log("Client Additional Info:", clientAdditionalInfo);
     console.log("Product Name:", productName);
     console.log("Product Description:", productDescription);
 
@@ -116,6 +119,16 @@ export default function InputsPage() {
               placeholder="Enter client's name"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="clientAdditionalInfo">Additional Client Information</label>
+            <textarea
+              id="clientAdditionalInfo"
+              placeholder="Enter any additional information about the client (e.g., Cofounder of Minoa in SF)"
+              rows="3"
+              value={clientAdditionalInfo}
+              onChange={(e) => setClientAdditionalInfo(e.target.value)}
             />
           </div>
           <div className={styles.inputGroup}>

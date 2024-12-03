@@ -15,6 +15,7 @@ export function RequestProvider({ children }) {
   const [productName, setPN] = useState("");
   const [productDescription, setPD] = useState("");
   const [selectedSources, setSS] = useState([]);
+  const [clientAdditionalInfo, setCAI] = useState("");
   const value = {
     SERVER,
     sellerName,
@@ -23,6 +24,7 @@ export function RequestProvider({ children }) {
     productName,
     productDescription,
     selectedSources,
+    clientAdditionalInfo,
     setSellerName: (x) => {
       setSN(x);
     },
@@ -40,6 +42,9 @@ export function RequestProvider({ children }) {
     },
     setSelectedSources: (x) => {
       setSS(x);
+    },
+    setClientAdditionalInfo: (x) => {
+      setCAI(x);
     },
   };
   return (
