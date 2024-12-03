@@ -112,13 +112,13 @@ export default function InputsPage() {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="linkedin">LinkedIn URL</label>
+            <label htmlFor="clientName">Client Name</label>
             <input
-              type="url"
-              id="linkedin"
-              placeholder="Enter your LinkedIn profile URL"
-              value={linkedInUrl}
-              onChange={(e) => setLinkedInURL(e.target.value)}
+              type="text"
+              id="clientName"
+              placeholder="Enter client name"
+              value={clientName}
+              onChange={(e) => setClientName(e.target.value)}
             />
           </div>
           <div className={styles.inputGroup}>
