@@ -176,7 +176,7 @@ function Modal({ title, children, onClose }) {
             X
           </button>
         </div>
-        {children}
+        <p className="w-11/12 mx-auto">{children}</p>
       </div>
     </div>
   );
