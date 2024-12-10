@@ -53,7 +53,7 @@ export default function SourcesPage() {
       ) : (
         ""
       )}
-      <div className="w-3/6 portrait:w-5/6  h-auto m-auto p-5 bg-white rounded-2xl flex flex-col">
+      <div className="w-3/6 portrait:w-5/6  h-auto m-auto p-5 bg-white rounded-2xl flex flex-col shadow-lg">
         <h1 className="mx-auto text-4xl font-extrabold text-center">
           Data Source Selection
         </h1>
