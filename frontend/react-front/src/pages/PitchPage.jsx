@@ -23,7 +23,7 @@ export default function PitchPage() {
   const generatePitch = async () => {
     console.log(BASE_URL + "/generation/generate_sales_pitch");
     try {
-      setLoading(false);
+      setLoading(true);
       console.log("loading");
       const response = await fetch(
         BASE_URL + "/generation/generate_sales_pitch",
