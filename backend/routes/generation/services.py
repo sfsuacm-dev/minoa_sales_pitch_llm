@@ -2,6 +2,9 @@ from .model import pitch_generation_request, pitch_generation_response
 import requests
 import json
 from ...dependencies.firebase_interface import *
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
 def call_llm(prompt : str):
     r = requests.post(
@@ -61,8 +64,54 @@ async def vector_search_relevant_docs(sales_information : pitch_generation_reque
     
     return retrieved_sources_str, source_names
 
-async def get_perplexity_response(prompt : str):
-    pass
+async def get_perplexity_response(prompt: str):
+    """Get response from Perplexity AI for investigating a person"""
+    load_dotenv()
+    client = OpenAI(
+        api_key=os.getenv("PERPLEXITY_API_KEY"),
+        base_url="https://api.perplexity.ai"
+    )
+    
+    investigative_prompt = f"""As a skilled private investigator, conduct a thorough background investigation on this person:
+
+{prompt}
+
+Please provide a comprehensive report covering all available information about this individual. Include:
+
+- Personal background and basic information
+- Professional history and career trajectory
+- Educational background
+- Notable achievements or contributions
+- Public presence and reputation
+- Professional relationships and associations
+- Recent activities or developments
+- Media coverage or public statements
+- Any controversies or notable incidents
+- Social media presence and public profiles
+- Professional or business ventures
+- Any other relevant findings about the individual
+
+For each piece of information discovered, please cite your sources. If certain information cannot be verified or found, indicate this clearly. Maintain objectivity and focus on factual, verifiable information. If there are conflicting reports about the person, present all perspectives fairly."""
+    
+    messages = [
+        {"role": "system", "content": "You are a thorough and meticulous private investigator who specializes in background research on individuals. Provide detailed, factual information with sources while maintaining professional ethics and respect for privacy."},
+        {"role": "user", "content": investigative_prompt}
+    ]
+    
+    try:
+        response = client.chat.completions.create(
+            model="llama-3.1-sonar-small-128k-online",
+            messages=messages,
+            temperature=0.2,
+            top_p=0.9,
+            frequency_penalty=1.0,
+            stream=False
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"Error in Perplexity API call: {str(e)}")
+        return ""
+
 
 #should be a mix of the LINKEDIN information, 
 #perplexity information
