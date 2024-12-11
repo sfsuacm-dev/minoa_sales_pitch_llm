@@ -6,6 +6,8 @@ import textwrap
 
 load_dotenv()
 
+# Will keep this file for testing purposes—I think it's better to generate perplexity response directly in generation folder
+
 class PerplexityClient:
     """Client for interacting with Perplexity AI API"""
     
