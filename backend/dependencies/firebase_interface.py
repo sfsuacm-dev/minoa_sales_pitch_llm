@@ -14,11 +14,11 @@ class FirestoreWorker:
             cred = credentials.Certificate(credentials_path)
             app = firebase_admin.initialize_app(cred, name="minoa-llm-vector-store")
             print(app.name)
-        self.db_engine = firestore.client(app=app)
+            
+        self.db_engine = firestore.client(app=firebase_admin.get_app("minoa-llm-vector-store"))
         self.db_engine._database_string_internal=(
             "projects/inspired-muse-440603-a1/databases/minoa-llm-vector-store"
         )
-
     def write_rag_document_chunk(self, document_title : str, document_chunk : str, source_classification_id : int):
         """
         firestore schema
