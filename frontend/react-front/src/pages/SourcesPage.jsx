@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CheckMark from "../images/image.png";
 import { useRequestContext } from "../contexts/request_context";
-import styles from "./InputsPage.module.css";
+import styles from "./SourcesPage.module.css";
 import Navbar from "../components/Navbar";
 
 export default function SourcesPage() {
@@ -58,7 +58,7 @@ export default function SourcesPage() {
           Data Source Selection
         </h1>
         <p className="mx-auto text-lg text-gray-600">
-          Selct from <b>{sources.length}</b> sources
+          Select from <b>{sources.length}</b> sources
         </p>
         <div
           className="mx-auto my-5 w-5/6 p-7 outline outline-gray-300 flex flex-row flex-wrap overflow-scroll"
@@ -90,8 +90,7 @@ export default function SourcesPage() {
         </div>
         <div className="mx-auto">
           <button
-            className="hover:scale-90 transition p-3 rounded-md text-white"
-            style={{ backgroundColor: "#0E172A" }}
+            className={styles.backButton}
             onClick={() => {
               navigate("/");
             }}
@@ -99,8 +98,7 @@ export default function SourcesPage() {
             Back
           </button>
           <button
-            className="hover:scale-90 transition p-3 ml-5 rounded-md"
-            style={{ backgroundColor: "#00F8F3" }}
+            className={styles.generateButton}
             onClick={() => {
               submitSources();
             }}
