@@ -23,7 +23,7 @@ export default function PitchPage() {
   const generatePitch = async () => {
     console.log(BASE_URL + "/generation/generate_sales_pitch");
     try {
-      // setLoading(true);
+      setLoading(true);
       console.log("loading");
       const response = await fetch(
         BASE_URL + "/generation/generate_sales_pitch",
@@ -100,9 +100,9 @@ export default function PitchPage() {
             <DownloadButton content={resultData} />
           </div>
           {/* pitch */}
-          {error ? error : <TextEditor>{resultData}</TextEditor>}
+          {error ? error : <ReactMarkdown>{resultData}</ReactMarkdown>}
+          {/* <TextEditor>{resultData}</TextEditor> */}
         </div>
-        <ReactMarkdown>{resultData}</ReactMarkdown> {/* Keep ?? */}
       </div>
     </div>
   );
