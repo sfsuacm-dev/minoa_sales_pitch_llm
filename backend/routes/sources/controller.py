@@ -6,10 +6,11 @@ router = APIRouter(
     prefix="/sources"
 )
 
+db_worker = FirestoreWorker()
+
 @router.get("/all_sources", response_model=list[all_source_info_response])
 def get_all_sources() -> all_source_info_response :
     
-    db_worker = FirestoreWorker()
     try:
         all_sources_dict = db_worker.get_rag_sources_types()
     except Exception as e:
