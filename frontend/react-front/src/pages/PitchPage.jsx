@@ -100,9 +100,9 @@ export default function PitchPage() {
             <DownloadButton content={resultData} />
           </div>
           {/* pitch */}
-          {error ? error : <ReactMarkdown>{resultData}</ReactMarkdown>}
-          {/* <TextEditor>{resultData}</TextEditor> */}
+          {error || loading ? error : <TextEditor>{resultData}</TextEditor>}
         </div>
+        {/* <ReactMarkdown>{resultData}</ReactMarkdown> */}
       </div>
     </div>
   );
