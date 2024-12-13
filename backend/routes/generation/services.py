@@ -181,35 +181,35 @@ async def driver(sales_pitch_request : pitch_generation_request, source_selectio
 
     if perplexity_response:
         llama_prompt = f"""
-        You are a senior marketing associate.
-        Create a sales pitch for a company named {sales_pitch_request.company_name}. 
-        The product that needs to be pitched is called {sales_pitch_request.product_name}.
-        Here is some information about the product that needs to be pitched: {sales_pitch_request.product_description}.
+    You are a senior marketing associate. 
+    Create a sales pitch for a company named {sales_pitch_request.company_name}. 
+    The product that needs to be pitched is called {sales_pitch_request.product_name}.
+    Here is some information about the product that needs to be pitched: {sales_pitch_request.product_description}.
 
-        Here is some information about the client you will be making the sales pitch for:
-        {perplexity_response}
+    Here is some information about the client you will be making the sales pitch for:
+    {perplexity_response}
 
-        Tailor the sales pitch to the client's background based on this information.
+    Tailor the sales pitch to the client's background based on this information.
 
-        Here are some documents that may help in the creation of a sales pitch:
-        {documents_embed_str}
+    Here are some documents that may help in the creation of a sales pitch:
+    {documents_embed_str}
 
-        Use ONLY the relevant information in the mentioned documents. Feel free to leave out information that is not related.
-        When you use a document, cite the source TITLE NOT the document number. Give DIRECT quotes from the mentioned documents. Documents with statistics are better.
-        When using information from the documents, put the citation directly after that information block. 
-        For example if I am using the fact that "Tinder is the leading dating app" (Statista Report on Dating Apps in 2023) 
+    Use ONLY the relevant information in the mentioned documents. Feel free to leave out information that is not related.
+    When you use a document, cite the source TITLE NOT the document number. Give DIRECT quotes from the mentioned documents. Documents with statistics are better.
+    When using information from the documents, put the citation directly after that information block. 
+    For example if I am using the fact that "Tinder is the leading dating app" (Statista Report on Dating Apps in 2023) 
 
-        Discuss specifically how this product beats out other products on the market and why this product in general should be chosen.
+    Discuss specifically how this product beats out other products on the market and why this product in general should be chosen.
 
-        The structure of the sales pitch should be as so:
-        1. Introducing the problem that the product potentially solves
-        2. Introducing the product itself and its features
-        3. Talk about how this product beats out other products on the market
-        4. Talk about in general why this product should be chosen
+    The structure of the sales pitch should be as so:
+    1. Introducing the problem that the product potentially solves
+    2. Introducing the product itself and its features
+    3. Talk about how this product beats out other products on the market
+    4. Talk about in general why this product should be chosen
 
-        DO NOT HALLUCINATE and DO NOT makeup information likes sale codes. 
-        ONLY respond with the sales pitch. Nothing more.
-        """
+    DO NOT mention anything about yourself.
+    DO NOT HALLUCINATE and DO NOT makeup information likes sale codes. 
+    ONLY respond with the sales pitch. Nothing more."""
     
     print(llama_prompt)
 
