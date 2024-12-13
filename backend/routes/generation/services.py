@@ -98,26 +98,24 @@ async def get_perplexity_response(prompt: str):
         base_url="https://api.perplexity.ai"
     )
     
-    investigative_prompt = f"""As a skilled private investigator, conduct a thorough background investigation on this person:
+    investigative_prompt = f"""You are a customer insights analyst collecting information about the following person or company:
 
 {prompt}
 
-Please provide a comprehensive report covering all available information about this individual. Include:
+Please provide a comprehensive summary covering all available information about this entity. Include:
 
-- Personal background and basic information
-- Professional history and career trajectory
-- Educational background
-- Notable achievements or contributions
+- Background and basic information
+- History and trajectory
 - Public presence and reputation
-- Professional relationships and associations
+- Relationships and associations to other entities
 - Recent activities or developments
 - Media coverage or public statements
-- Any controversies or notable incidents
 - Social media presence and public profiles
-- Professional or business ventures
-- Any other relevant findings about the individual
+- Any other relevant findings about the entity
 
-For each piece of information discovered, please cite your sources. If certain information cannot be verified or found, indicate this clearly. Maintain objectivity and focus on factual, verifiable information. If there are conflicting reports about the person, present all perspectives fairly."""
+For each piece of information discovered, please cite your sources. If certain information cannot be verified or found, indicate this clearly. Maintain objectivity and focus on factual, verifiable information. If there are conflicting reports about the person, present all perspectives fairly.
+Write this content in a summarized paragraph form.
+"""
     
     messages = [
         {"role": "system", "content": "You are a thorough and meticulous private investigator who specializes in background research on individuals. Provide detailed, factual information with sources while maintaining professional ethics and respect for privacy."},
@@ -188,10 +186,10 @@ async def driver(sales_pitch_request : pitch_generation_request, source_selectio
         The product that needs to be pitched is called {sales_pitch_request.product_name}.
         Here is some information about the product that needs to be pitched: {sales_pitch_request.product_description}.
 
-        Here is some information about the person you will be making the sales pitch for:
+        Here is some information about the client you will be making the sales pitch for:
         {perplexity_response}
 
-        Tailor the sales pitch to the client's background.
+        Tailor the sales pitch to the client's background based on this information.
 
         Here are some documents that may help in the creation of a sales pitch:
         {documents_embed_str}
@@ -212,7 +210,9 @@ async def driver(sales_pitch_request : pitch_generation_request, source_selectio
         DO NOT HALLUCINATE and DO NOT makeup information likes sale codes. 
         ONLY respond with the sales pitch. Nothing more.
         """
-        
+    
+    print(llama_prompt)
+
     sales_pitch_text = call_paas_llm(llama_prompt)
 
     return pitch_generation_response(

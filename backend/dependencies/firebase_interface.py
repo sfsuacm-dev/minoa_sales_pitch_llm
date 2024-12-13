@@ -57,7 +57,10 @@ class FirestoreWorker:
         
         collection = self.db_engine.collection("text_chunks")
 
-        if source_ids:
+        if source_ids == [4]:
+            collection = collection.where(filter=firestore.FieldFilter("source_classification", "in", [1,2,3,4]))
+
+        elif source_ids:
             collection = collection.where(filter=firestore.FieldFilter("source_classification", "in", source_ids))
 
         vector_query = collection.find_nearest(
