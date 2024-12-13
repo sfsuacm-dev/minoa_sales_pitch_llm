@@ -126,9 +126,23 @@ export default function InputsPage() {
         <div className={styles.inputSection}>
           <h1 className={styles.heroTitle}>Client and Product Info</h1>
           {inputFields[index]}
-          <button className={styles.generateButton} onClick={handleNext}>
-            {index < inputFields.length ? "Next" : "Save and Select Sources"}
-          </button>
+          <div className="">
+            <button className={styles.generateButton} onClick={handleNext}>
+              {index < inputFields.length ? "Next" : "Save and Select Sources"}
+            </button>
+            {index < inputFields.length && index > 0 ? (
+              <button
+                className={styles.generateButton}
+                onClick={() => {
+                  setIndex(index - 1);
+                }}
+              >
+                Back
+              </button>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       </main>
     </div>
