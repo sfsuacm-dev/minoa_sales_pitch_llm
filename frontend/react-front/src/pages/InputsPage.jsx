@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRequestContext } from "../contexts/request_context";
 import styles from "./InputsPage.module.css";
+import Navbar from "../components/Navbar";
+import { input } from "framer-motion/client";
 
 export default function InputsPage() {
+  const [index, setIndex] = useState(0);
+
   const navigate = useNavigate();
   const {
     SERVER,
@@ -28,131 +32,102 @@ export default function InputsPage() {
     console.log("Client Additional Info:", clientAdditionalInfo);
     console.log("Product Name:", productName);
     console.log("Product Description:", productDescription);
-
+    if (index < inputFields.length) {
+      setIndex(index + 1);
+      return;
+    }
     navigate("/sources");
   };
 
+  // all input fields
+  const inputFields = [
+    <>
+      <div className={styles.inputGroup}>
+        <label htmlFor="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          placeholder="Enter your full name"
+          value={sellerName}
+          onChange={(e) => setSellerName(e.target.value)}
+        />
+      </div>
+      <div className={styles.inputGroup}>
+        <label htmlFor="company">Company</label>
+        <input
+          type="text"
+          id="company"
+          placeholder="Enter your company name"
+          value={companyName}
+          onChange={(e) => setCompanyName(e.target.value)}
+        />
+      </div>
+    </>,
+    <>
+      <div className={styles.inputGroup}>
+        <label htmlFor="clientName">Client Name</label>
+        <input
+          type="text"
+          id="clientName"
+          placeholder="Enter client name"
+          value={clientName}
+          onChange={(e) => setClientName(e.target.value)}
+        />
+      </div>
+      <div className={styles.inputGroup}>
+        <label htmlFor="clientAdditionalInfo">
+          Additional Client Information
+        </label>
+        <textarea
+          id="clientAdditionalInfo"
+          placeholder="Enter any additional information about the client (e.g., Cofounder of Minoa in SF)"
+          rows="3"
+          value={clientAdditionalInfo}
+          onChange={(e) => setClientAdditionalInfo(e.target.value)}
+        />
+      </div>
+    </>,
+    <>
+      <div className={styles.inputGroup}>
+        <label htmlFor="productName">Product Name</label>
+        <input
+          type="text"
+          id="productName"
+          placeholder="Enter your product name"
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
+        />
+      </div>
+      <div className={styles.inputGroup}>
+        <label htmlFor="productDescription">Product Description</label>
+        <textarea
+          id="productDescription"
+          placeholder="Enter a brief description of your product"
+          rows="3"
+          value={productDescription}
+          onChange={(e) => setProductDescription(e.target.value)}
+        />
+      </div>
+    </>,
+  ];
+
   return (
     <div>
-      <nav className={styles.nav}>
-        <div className={styles.logo}>
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12 2L2 7L12 12L22 7L12 2Z"
-              stroke="#0f172a"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M2 17L12 22L22 17"
-              stroke="#0f172a"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M2 12L12 17L22 12"
-              stroke="#0f172a"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          Minoa
-        </div>
-        <div className={styles.navLinks}>
-          <a href="/">Home</a>
-          <a href="/">Product</a>
-          <a href="/">Resources</a>
-          <a href="/">Careers</a>
-          <a href="/">About</a>
-          <a href="/" className={`${styles.button} ${styles.buttonOutline}`}>
-            Login
-          </a>
-          <a href="/" className={`${styles.button} ${styles.buttonFilled}`}>
-            Book a demo
-          </a>
-        </div>
-      </nav>
+      <Navbar />
       <main className={styles.mainContent}>
-        <h1 className={styles.heroTitle}>
+        {/* <h3 className={styles.heroTitle}>
           One platform for modern sales teams to save time and close deals
           faster
-        </h1>
-        <p className={styles.heroSubtitle}>
-          Leverage our AI agent to instantly research your clients and get the
-          insights you need in minutes.
-          <br />
-          No more manual searches or wasted hours.
-        </p>
+        </h3> */}
+        {/* <p className={styles.heroSubtitle}>
+          Effortlessly research prospects and craft tailored sales pitches in
+          minutes with this AI Agent.
+        </p> */}
         <div className={styles.inputSection}>
-          <div className={styles.inputGroup}>
-            <label htmlFor="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Enter your full name"
-              value={sellerName}
-              onChange={(e) => setSellerName(e.target.value)}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label htmlFor="company">Company</label>
-            <input
-              type="text"
-              id="company"
-              placeholder="Enter your company name"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label htmlFor="clientName">Client Name</label>
-            <input
-              type="text"
-              id="clientName"
-              placeholder="Enter client name"
-              value={clientName}
-              onChange={(e) => setClientName(e.target.value)}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label htmlFor="clientAdditionalInfo">Additional Client Information</label>
-            <textarea
-              id="clientAdditionalInfo"
-              placeholder="Enter any additional information about the client (e.g., Cofounder of Minoa in SF)"
-              rows="3"
-              value={clientAdditionalInfo}
-              onChange={(e) => setClientAdditionalInfo(e.target.value)}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label htmlFor="productName">Product Name</label>
-            <input
-              type="text"
-              id="productName"
-              placeholder="Enter your product name"
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label htmlFor="productDescription">Product Description</label>
-            <textarea
-              id="productDescription"
-              placeholder="Enter a brief description of your product"
-              rows="3"
-              value={productDescription}
-              onChange={(e) => setProductDescription(e.target.value)}
-            />
-          </div>
+          <h1 className={styles.heroTitle}>Client and Product Info</h1>
+          {inputFields[index]}
           <button className={styles.generateButton} onClick={handleNext}>
-            Next
+            {index < inputFields.length ? "Next" : "Save and Select Sources"}
           </button>
         </div>
       </main>

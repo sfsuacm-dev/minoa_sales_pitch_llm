@@ -36,7 +36,7 @@ export default function Navbar() {
           Minoa
         </div>
         <div className={styles.navLinks}>
-          <a href="/">Home</a>
+          {/* <a href="/">Home</a>
           <a href="/">Product</a>
           <a href="/">Resources</a>
           <a href="/">Careers</a>
@@ -46,7 +46,7 @@ export default function Navbar() {
           </a>
           <a href="/" className={`${styles.button} ${styles.buttonFilled}`}>
             Book a demo
-          </a>
+          </a> */}
         </div>
       </nav>
     </div>

@@ -87,10 +87,10 @@ export default function PitchPage() {
           ""
         )}
         {/* pitch window */}
-        <div className="p-4 bg-white rounded-md outline outline-gray-300">
+        <div className="p-4 bg-white rounded-md shadow-lg">
           {/* header */}
-          <div id="header" className="flex w-full">
-            <h1 className="text-2xl grow">Generated Sales Pitch</h1>
+          <div id="header" className="mb-2 flex w-full items-center">
+            <h1 className="text-2xl font-bold grow">Generated Sales Pitch</h1>
             <button
               onClick={handleGenerateSlides}
               className="bg-black hover:bg-blue-700 text-white font-bold mx-3 py-2 px-4 rounded ml-auto"
@@ -100,9 +100,9 @@ export default function PitchPage() {
             <DownloadButton content={resultData} />
           </div>
           {/* pitch */}
-          {error ? error : <ReactMarkdown>{resultData}</ReactMarkdown>}
+          {error || loading ? error : <TextEditor>{resultData}</TextEditor>}
         </div>
-        {/* <TextEditor /> */}
+        {/* <ReactMarkdown>{resultData}</ReactMarkdown> */}
       </div>
     </div>
   );
