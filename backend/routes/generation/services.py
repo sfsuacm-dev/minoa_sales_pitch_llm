@@ -5,8 +5,34 @@ from ...dependencies.firebase_interface import *
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
+from groq import Groq
 
 firebase_worker = FirestoreWorker()
+load_dotenv()
+
+
+def call_paas_llm(prompt : str):
+    llama_key = os.getenv("LLAMA_API_KEY")
+
+    client = Groq(
+        api_key=llama_key
+    )
+
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role" : "user",
+                "content" : f"{prompt}"
+            }
+        ],
+        model="llama-3.3-70b-versatile",
+        stream=False
+    )
+
+    # print(chat_completion.choices[0].message.content)
+
+    return chat_completion.choices[0].message.content
+
 
 def call_llm(prompt : str):
     r = requests.post(
@@ -67,7 +93,6 @@ async def vector_search_relevant_docs(sales_information : pitch_generation_reque
 
 async def get_perplexity_response(prompt: str):
     """Get response from Perplexity AI for investigating a person"""
-    load_dotenv()
     client = OpenAI(
         api_key=os.getenv("PERPLEXITY_API_KEY"),
         base_url="https://api.perplexity.ai"
@@ -188,7 +213,7 @@ async def driver(sales_pitch_request : pitch_generation_request, source_selectio
         ONLY respond with the sales pitch. Nothing more.
         """
         
-    sales_pitch_text = call_llm(llama_prompt)["message"]["content"]
+    sales_pitch_text = call_paas_llm(llama_prompt)
 
     return pitch_generation_response(
         generated_sales_pitch=sales_pitch_text,
